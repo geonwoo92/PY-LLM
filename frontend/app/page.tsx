@@ -19,7 +19,7 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log('입력된 값 : ' + JSON.stringify(data));
-    fetch('http://localhost:8000/chat', {
+    fetch('http://localhost:8000/titanic', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,42 +29,62 @@ export default function Home() {
     .then((response) => response.json()) // 응답을 JSON으로 파싱
     .then((data) => {
       console.log("응답:", data); // 응답 데이터를 콘솔에 출력
-      setMessage(data.answer); // 응답 데이터를 상태에 저장
+      setMessage(data); // 응답 데이터를 상태에 저장
     })
     .catch((error) => console.log("에러:", error));
     
   }
-  console.log(watch("question"))
+  // console.log(watch("question"))
  
   return (
-    <div className="h-screen flex justify-center items-center bg-gray-100">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg">
-        <div className="p-8">
-          <h2 className="text-4xl font-bold mb-8 text-center">Chat GPT</h2>
-          <div className="bg-gray-200 rounded-lg p-6 mb-8 h-80 overflow-y-auto">
-          {<h4>{message? message : ""}</h4>}
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex items-center mb-6">
-              <input
-                type="text"
-                {...register("question", { required: true })}
-                className="flex-1 py-4 px-6 border border-gray-300 rounded-l-lg focus:outline-none focus:border-blue-500"
-                placeholder="메시지를 입력하세요..."
-              />
-              <button
-                type="submit"
-                className="py-4 px-8 bg-blue-500 text-white font-bold rounded-r-lg transition duration-300 ease-in-out hover:bg-blue-600"
-              >
-                전송
-              </button>
-            </div>
-            {errors.question && (
-              <span className="text-red-500 block mb-4">메시지를 입력하세요.</span>
-            )}
-          </form>
-        </div>
+  <>  <div className="h-screen flex justify-center items-center bg-gray-100">
+  <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg">
+    <div className="p-16">
+      <div className="flex items-center justify-center">
+        <h1 className="text-4xl font-bold">geon GPT에게 물어봐</h1>
+      </div><br />
+      <div className="bg-gray-200 rounded-lg p-4 mb-4 h-48 overflow-y-auto text-lg">
+        <h4>{message ? message: "" }</h4>
       </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="text"
+          {...register("question", { required: true })}
+          className="block w-full py-4 px-6 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500"
+          placeholder="메시지를 입력하세요..."
+        />
+        <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="border border-gray-300 p-4 rounded-lg">
+            <label className="inline-flex items-center">
+              <input type="radio" className="form-radio" name="radio" />
+              <span className="ml-2">버튼1</span>
+            </label>
+            {/* 버튼1 아래에 사진이 들어갈 공간 */}
+          </div>
+          <div className="border border-gray-300 p-4 rounded-lg">
+            <label className="inline-flex items-center">
+              <input type="radio" className="form-radio" name="radio" />
+              <span className="ml-2">버튼2</span>
+            </label>
+            {/* 버튼2 아래에 사진이 들어갈 공간 */}
+          </div>
+          <div className="border border-gray-300 p-4 rounded-lg">
+            <label className="inline-flex items-center">
+              <input type="radio" className="form-radio" name="radio" />
+              <span className="ml-2">버튼3</span>
+            </label>
+            {/* 버튼3 아래에 사진이 들어갈 공간 */}
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="py-4 px-8 bg-blue-500 text-white font-bold rounded-lg transition duration-300 ease-in-out hover:bg-blue-600"
+        >
+          전송
+        </button>
+      </form>
     </div>
-  );
+  </div>
+</div>
+</>)
 }

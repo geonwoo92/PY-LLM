@@ -6,6 +6,10 @@ import os
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
+import uvicorn
+from app.api.titanic.model.titanic_model import TitanicModel
+from app.main_router import router
+
 
 class Request(BaseModel):
     question: str
@@ -14,6 +18,8 @@ class Response(BaseModel):
     answer: str
 
 app = FastAPI()
+
+app.include_router(router)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -44,7 +50,7 @@ llm = OpenAI(openai_api_key="...")
 
 
 
-@app.post("/chat")
+#@app.post("/chat")
 def chatting(req:Request):
     print('딕셔너리 내용')
     print(req)
@@ -78,3 +84,6 @@ def chatting(req:Request):
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: str = None):
     return {"item_id": item_id, "q": q}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8000)
