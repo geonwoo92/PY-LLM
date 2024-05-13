@@ -3,12 +3,12 @@ from dataclasses import dataclass
 
 @dataclass
 class TitanicModel:
-    context: str
-    fname: str
-    train: str  
-    test: str
-    id: str
-    label: str
+    _context: str  = ""
+    _fname: str = ""
+    _train: object  = None
+    _test: object = None
+    _id: str = ""
+    _label: str = ""
 
     @property
     def context(self) -> str: return self._context
