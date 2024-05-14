@@ -14,6 +14,7 @@ type Inputs = {
   exampleRequired?: string
 }
 
+
 export default function Home() {
   const [message, setMessage] = useState('')
   const [category, setCategory] = useState('')
@@ -22,7 +23,7 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log('입력된 값 : ' + JSON.stringify(data));
-    fetch('http://localhost:8000/api/chat/'+ `${category}`, {
+    fetch('http://localhost:8000/api/chat/' + `${category}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,45 +62,43 @@ export default function Home() {
           </div><br />
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="border border-gray-300  p-4 rounded bg-white">
-              <label className="inline-flex items-center">
-                <input onClick={handleRadio} value={"titanic"} type="radio" className="form-radio" name="radio" />
+
+              <input onClick={handleRadio} value={"titanic"} type="radio" className="form-radio" id="titanicRadio" name="radio" />
+              <label htmlFor="titanicRadio" className="cursor-pointer">
                 <span className="ml-2">Titanic</span>
+                {/* 버튼1 아래에 사진이 들어갈 공간 */}
+                <img src="/image/titanic.jpg" alt="Example" className="mt-4 w-full h-15 object-cover rounded-lg" />
               </label>
-              {/* 버튼1 아래에 사진이 들어갈 공간 */}
-              <img src="/image/titanic.jpg" alt="Example" className="mt-4 w-full h-15 object-cover rounded-lg" />
+
             </div>
             <div className="border border-gray-300 p-4 rounded bg-white">
-              <label className="inline-flex items-center">
-                <input onClick={handleRadio} value={"new2"} type="radio" className="form-radio" name="radio" />
+              <input onClick={handleRadio} value={"new2"} type="radio" className="form-radio" id="new2Radio" name="radio" />
+              <label htmlFor="new2Radio" className="cursor-pointer">
                 <span className="ml-2">버튼2</span>
+                <img src="/image/back.jpg" alt="Example2" className="mt-4 w-full h-15 object-cover rounded-lg" />
               </label>
-              {/* 버튼2 아래에 사진이 들어갈 공간 */}
-              <img src="/image/back.jpg" alt="Example" className="mt-4 w-full h-15 object-cover rounded-lg" />
             </div>
             <div className="border border-gray-300 p-4 rounded bg-white">
-              <label className="inline-flex items-center">
-                <input onClick={handleRadio} value={"new3"} type="radio" className="form-radio" name="radio" />
+              <input onClick={handleRadio} value={"new3"} type="radio" className="form-radio" id="new3Radio" name="radio" />
+              <label htmlFor="new3Radio" className="cursor-pointer">
                 <span className="ml-2">버튼3</span>
+                <img src="/image/street.jpg" alt="Example3" className="mt-4 w-full h-15 object-cover rounded-lg" />
               </label>
-              <img src="/image/street.jpg" alt="Example" className="mt-4 w-full h-15 object-cover rounded-lg" />
             </div>
           </div><br />
-          <div className="border border-gray-300 rounded bg-white p-4 mb-4 h-64 overflow-y-auto text-lg">
-
+          <div className="border border-gray-300 rounded bg-white p-4 mb-4 h-64 overflow-y-auto text-lg w-2/3">
             <h4>{message ? message : ""}</h4>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
               {...register("question", { required: true })}
-              className="block w-full py-4 px-6 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500"
-              placeholder="메시지를 입력하세요..."
-            />
-            <button
-              type="submit"
-              className="py-4 px-8 bg-blue-500 text-white font-bold rounded-lg transition duration-300 ease-in-out hover:bg-blue-600"
-            >
-              전송
+              className="block w-full py-4 px-6 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500 w-2/3"
+              placeholder="메시지를 입력하세요..." />
+            <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-500 to-blue-600 group-hover:from-blue-600 group-hover:to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:text-white dark:focus:ring-blue-800">
+              <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                전송
+              </span>
             </button>
           </form>
         </div>
@@ -107,3 +106,4 @@ export default function Home() {
     </div>
     </>)
 }
+

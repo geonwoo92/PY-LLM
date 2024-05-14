@@ -28,3 +28,24 @@ async def titanic(req:Request):
     
 
     return{"타이타닉 생존자는 100명"}
+
+@router.post('/new2')
+async def news2(req:Request):
+ 
+   
+
+    print(req)
+    
+
+    return{"두번째 버튼 응답."}
+
+
+@router.post('/new3')
+async def news2(req:Request):
+ 
+   
+
+    print(req)
+    
+
+    return{"주말 언제 오나요?"}
