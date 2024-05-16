@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { HeartIcon } from '@heroicons/react/20/solid'
 
 type Message = {
   content: string;
@@ -48,13 +48,13 @@ export default function Home() {
 
 
   return (
-    <>  <div className="h-screen flex justify-center items-center bg-gray-100">
+     <div className="h-screen flex justify-center items-center bg-gray-100">
       <div className="h-screen flex justify-center items-center backgroundImage" //배경 이미지
         style={{
           backgroundImage: "url('/image/background.jpg')", // 상대 경로 수정
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}
+        }} 
       >
         <div className="p-8">
           <div className="flex items-center justify-center">
@@ -86,14 +86,14 @@ export default function Home() {
               </label>
             </div>
           </div><br />
-          <div className="border border-gray-300 rounded bg-white p-4 mb-4 h-64 overflow-y-auto text-lg w-2/3">
+          <div className="border border-gray-300 rounded bg-white p-4 mb-4 h-64 overflow-y-auto text-lg w-1/2">
             <h4>{message ? message : ""}</h4>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
               {...register("question", { required: true })}
-              className="block w-full py-4 px-6 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500 w-2/3"
+              className="block py-4 px-6 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500 w-1/2"
               placeholder="메시지를 입력하세요..." />
             <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-500 to-blue-600 group-hover:from-blue-600 group-hover:to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:text-white dark:focus:ring-blue-800">
               <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -102,8 +102,10 @@ export default function Home() {
             </button>
           </form>
         </div>
+
+
       </div>
     </div>
-    </>)
+    )
 }
 

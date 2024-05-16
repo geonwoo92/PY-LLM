@@ -7,26 +7,26 @@ class Models:
     def __init__(self) -> None:
         self.ds = DataSets()
         this = self.ds
-        this.dname = './data/'  # 데이터 저장소
-        this.sname = './save/'  # 모델 저장소
+        this.dname = './app/api/context/data/'  # 데이터 저장소
+        this.sname = './app/api/context/save/'  # 모델 저장소
 
 
-    def new_model(self, fname) -> object:
+    def new_dataframe_with_index(self, fname: pd.DataFrame) -> pd.DataFrame:
         this = self.ds
-        # index_col=0은 인덱스를 0으로 설정 해야 기존 인덱스 값이 유지된다.
-        # 0은 컬럼명 중에서 첫번째 컬럼을 인덱스로 사용하겠다는 의미(배열구조)
-        # pd.read_csv(f'경로/파일명/csv',index_col=0 = ' 인덱스로 지정할 cloumn명') Index 지정
+        # index_col=0 해야 기존 index 값이 유지된다
+        # 0 은 컬럼명 중에서 첫번째를 의미한다(배열구조)
+        # pd.read_csv(f'경로/파일명/csv', index_col=0 = '인덱스로 지정할 column 명') Index 지정
 
-        return pd.read_csv(f'{this.dname}{fname}', index_col=0)  # 인덱스를 0으로 설정
+     
+        return pd.read_csv(f'{this.dname}{fname}', index_col=0)
     
     
-    def new_dframe(self, fname) -> object:
+    def new_dataframe_no_index(self, fname: str) -> object:
         this = self.ds
-        # pd.read_csv(f'경로/파일명/csv') Index 를 지정하지 않음
-        
-        return pd.DataFrame(f'{this.dname}{fname}')  # 인덱스를 0으로 설정
+        # pd.read_csv('경로/파일명.csv') Index 를 지정하지 않음
+        return pd.read_csv(f'{this.dname}{fname}')
     
-    def save_model(self, fname, dframe) -> object:
+    def save_model(self, fname, dframe: pd.DataFrame) -> pd.DataFrame:
         this = self.ds
 
         '''
